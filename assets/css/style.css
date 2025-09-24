@@ -1,0 +1,512 @@
+/*
+ * Root
+ * Tailwind CSS theme
+ * Custom CSS
+  - Header - Header Component Styles
+  - Hero - Hero Section Styles
+  - Stats - Stats Section Styles
+ */
+
+
+
+@layer base {
+  /**
+   * CSS Reset and Base Styles
+   */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --primary: 210 29% 24%; /* #2C3E50 (Dark Navy Gray) */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 24 77% 51%; /* #E67E22 (Warm Orange) */
+    --secondary-foreground: 0 0% 100%;
+    --accent: 204 70% 54%; /* #3498DB (Modern Blue) */
+    --accent-foreground: 0 0% 100%;
+    --background: 210 17% 98%; /* #F8F9FA (Light Gray / Off White) */
+    --foreground: 0 0% 18%; /* #2D2D2D (Deep Charcoal) */
+    --success: 145 63% 42%; /* #27AE60 (Green) */
+    --warning: 33 89% 51%; /* #F39C12 (Amber Yellow) */
+    --danger: 6 64% 46%; /* #C0392B (Red) */
+    --muted: 210 17% 98%;
+    --muted-foreground: 0 0% 18%;
+    --destructive: 6 64% 46%; /* #C0392B (Red) */
+    --destructive-foreground: 210 17% 98%;
+    --border: 210 17% 98%;
+    --input: 210 17% 98%;
+    --ring: 0 0% 18%;
+    --radius: 0.5rem;
+
+    --sidebar-background: 210 17% 98%;
+    --sidebar-foreground: 0 0% 18%;
+    --sidebar-primary: 210 29% 24%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 204 70% 54%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 210 17% 98%;
+    --sidebar-ring: 0 0% 18%;
+  }
+
+  .dark {
+    --primary: 210 29% 24%; /* #2C3E50 (Dark Navy Gray) */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 24 77% 51%; /* #E67E22 (Warm Orange) */
+    --secondary-foreground: 0 0% 100%;
+    --accent: 204 70% 54%; /* #3498DB (Modern Blue) */
+    --accent-foreground: 0 0% 100%;
+    --background: 0 0% 18%; /* #2D2D2D (Deep Charcoal) */
+    --foreground: 210 17% 98%; /* #F8F9FA (Light Gray / Off White) */
+    --success: 145 63% 42%; /* #27AE60 (Green) */
+    --warning: 33 89% 51%; /* #F39C12 (Amber Yellow) */
+    --danger: 6 64% 46%; /* #C0392B (Red) */
+    --muted: 0 0% 18%;
+    --muted-foreground: 210 17% 98%;
+    --destructive: 6 64% 46%; /* #C0392B (Red) */
+    --destructive-foreground: 210 17% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 210 17% 98%;
+    --sidebar-background: 0 0% 18%;
+    --sidebar-foreground: 210 17% 98%;
+    --sidebar-primary: 210 29% 24%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 204 70% 54%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 210 17% 98%;
+  }
+
+  /* Additional responsive utilities */
+  .responsive-container {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #2C3E50, #3498DB);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #3498DB, #5D8CC9);
+  }
+
+  /* Mobile-first responsive breakpoints */
+  @media (max-width: 599px) {
+    .mobile-full-width {
+      width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  @media (max-width: 768px) {
+    body {
+      overflow-x: hidden;
+    }
+    
+    .container {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
+  }
+
+  /* Enhanced focus states for accessibility */
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid #3498DB;
+    outline-offset: 2px;
+  }
+}
+
+
+/* Header Component Styles */
+.header-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.header-appbar {
+  backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
+  border-bottom: 1px solid rgba(44,62,80,0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(44,62,80,0.08);
+}
+
+.header-appbar:hover {
+  box-shadow: 0 8px 32px rgba(44,62,80,0.12);
+  background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,249,250,0.98) 100%);
+}
+
+.header-toolbar {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  min-height: 64px;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .header-toolbar {
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .header-toolbar {
+    min-height: 72px;
+  }
+}
+
+/* Mobile Sidebar Styles */
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100vh;
+  background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,249,250,0.98) 100%);
+  backdrop-filter: blur(20px);
+  box-shadow: -4px 0 20px rgba(44,62,80,0.1);
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1300;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+}
+
+.mobile-sidebar.open {
+  right: 0;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1299;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(44,62,80,0.1);
+}
+
+.sidebar-nav-item {
+  display: block;
+  width: 100%;
+  padding: 1rem 0;
+  font-weight: 600;
+  color: #2C3E50;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(44,62,80,0.05);
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.sidebar-nav-item:hover {
+  color: #E67E22;
+  padding-left: 1rem;
+}
+
+.sidebar-social-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(44,62,80,0.1);
+}
+
+.sidebar-social-icons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Brand Logo Styles */
+.brand-avatar {
+  background: linear-gradient(135deg, #2C3E50 0%, #34495E 50%, #4A6FA5 100%);
+  width: 40px;
+  height: 40px;
+  font-weight: 900;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(44, 62, 80, 0.3);
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+.brand-avatar:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.4);
+  background: linear-gradient(135deg, #34495E 0%, #4A6FA5 50%, #5C80BC 100%);
+}
+
+@media (min-width: 600px) {
+  .brand-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .brand-avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 1.4rem;
+  }
+}
+
+.brand-status-indicator {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #10b981, #34d399);
+  animation: status-pulse 2s infinite;
+}
+
+@media (min-width: 600px) {
+  .brand-status-indicator {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (min-width: 900px) {
+  .brand-status-indicator {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@keyframes status-pulse {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.brand-name {
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #2C3E50 0%, #3498DB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 900px) {
+  .brand-name {
+    font-size: 1.3rem;
+  }
+}
+
+.brand-tagline {
+  color: #666;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+}
+
+@media (min-width: 900px) {
+  .brand-tagline {
+    font-size: 0.7rem;
+  }
+}
+
+/* Navigation Styles */
+.nav-button {
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  text-transform: none;
+  font-size: 0.9rem;
+  color: #2C3E50;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-button:hover {
+  background: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(235, 152, 78, 0.1) 100%);
+  color: #E67E22;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.2);
+}
+
+.nav-button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #E67E22, #EB984E);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-button:hover::before {
+  width: 80%;
+}
+
+@media (min-width: 1200px) {
+  .nav-button {
+    font-size: 0.95rem;
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+/* Icon Button Styles */
+.search-icon-button {
+  color: #666;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-icon-button:hover {
+  color: #3498DB;
+  background-color: rgba(52, 152, 219, 0.1);
+  transform: rotate(15deg);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.social-icon-button {
+  color: #666;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-icon-button:hover {
+  transform: translateY(-2px);
+}
+
+.mobile-menu-button {
+  color: #666;
+}
+
+.mobile-menu-button:hover {
+  color: #b91c1c;
+  background-color: rgba(185, 28, 28, 0.1);
+}
+
+/* Responsive Utilities */
+.brand-text-display {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .brand-text-display {
+    display: block;
+  }
+}
+
+.social-icons-display {
+  display: none;
+  gap: 0.25rem;
+}
+
+@media (min-width: 600px) {
+  .social-icons-display {
+    display: flex;
+  }
+}
+
+/* Hide navigation menu on mobile, show on desktop */
+.nav-menu-display {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .nav-menu-display {
+    display: flex;
+  }
+}
+
+/* Show mobile menu button only on mobile */
+.mobile-menu-display {
+  display: flex;
+}
+
+@media (min-width: 900px) {
+  .mobile-menu-display {
+    display: none;
+  }
+}
+
+/* Hide search icon on very small screens */
+.search-icon-display {
+  display: flex;
+}
+
+@media (max-width: 400px) {
+  .search-icon-display {
+    display: none;
+  }
+}
+
+
+/* Hero Section Styles */
+/* Hero Section Styles */
